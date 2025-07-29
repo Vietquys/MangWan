@@ -1,0 +1,15 @@
+conf t
+hostname SPOKE-TAYNGUYEN
+!
+interface e0/0
+ ip address 192.168.20.10 255.255.255.0
+ no shutdown
+interface s1/0
+ ip address 172.16.120.10 255.255.255.0
+ no shutdown
+!
+ip route 0.0.0.0 0.0.0.0 172.16.120.2
+!
+end
+wr
+!

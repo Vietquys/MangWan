@@ -1,0 +1,19 @@
+conf t 
+hostname P7
+!
+interface e0/0
+ mpls ip
+ ip address 172.16.37.70 255.255.255.0
+ no shutdown
+interface e0/1
+ mpls ip
+ ip address 172.16.74.70 255.255.255.0
+ no shutdown
+!
+router ospf 1
+ network 172.16.37.0 0.0.0.255 area 0
+ network 172.16.74.0 0.0.0.255 area 0
+!
+end
+wr
+!

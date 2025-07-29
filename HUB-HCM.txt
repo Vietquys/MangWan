@@ -1,0 +1,25 @@
+conf t
+hostname HUB-HCM
+!
+interface e0/1
+ ip address 192.168.11.10 255.255.255.0
+ no shutdown
+interface e0/2
+ ip address 192.168.10.10 255.255.255.0
+ no shutdown
+interface s1/0
+ ip address 172.16.110.10 255.255.255.0
+ no shutdown
+exit
+!
+ip route 0.0.0.0 0.0.0.0 172.16.110.1
+!
+router ospf 123
+ network 192.168.11.0 0.0.0.255 area 123
+ network 192.168.10.0 0.0.0.255 area 123
+ default-information originate
+!
+end 
+wr
+!
+

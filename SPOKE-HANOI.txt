@@ -1,0 +1,15 @@
+conf t
+hostname SPOKE-HANOI
+!
+interface e0/0
+ ip address 192.168.30.10 255.255.255.0
+ no shutdown
+interface s1/2
+ ip address 172.16.132.10 255.255.255.0
+ no shutdown
+!
+ip route 0.0.0.0 0.0.0.0 172.16.132.2
+!
+end
+wr
+!

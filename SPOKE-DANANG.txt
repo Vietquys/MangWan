@@ -1,0 +1,15 @@
+conf t
+hostname SPOKE-DANANG
+!
+interface e0/0
+ ip address 192.168.40.10 255.255.255.0
+ no shutdown
+interface s1/1
+ ip address 172.16.131.10 255.255.255.0
+ no shutdown
+!
+ip route 0.0.0.0 0.0.0.0 172.16.131.2
+!
+end
+wr
+!

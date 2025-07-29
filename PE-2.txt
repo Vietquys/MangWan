@@ -1,0 +1,52 @@
+conf t
+hostname PE-2
+!
+interface lo2
+ ip address 2.2.2.2 255.255.255.255
+!
+ip vrf CongTy
+ rd 1:1
+ route-target export 1:1
+ route-target import 1:1
+!
+interface e0/0
+ mpls ip
+ ip address 172.16.42.2 255.255.255.0
+ no shutdown
+interface s1/0
+ ip address 172.16.120.2 255.255.255.0
+ no shutdown
+!
+!
+!
+router ospf 1
+ router-id 2.2.2.2
+ network 2.2.2.2 0.0.0.0 area 0
+ network 172.16.42.0 0.0.0.255 area 0
+!
+router ospf 120 vrf CongTy
+ router-id 2.2.2.3
+ network 172.16.120.0 0.0.0.255 area 20
+ redistribute bgp 999 subnets
+ !
+ !
+ !
+router bgp 999
+ bgp log-neighbor-changes
+ neighbor 1.1.1.1 remote-as 999
+ neighbor 1.1.1.1 update-source lo2
+ neighbor 3.3.3.3 remote-as 999
+ neighbor 3.3.3.3 update-source lo2
+ address-family vpnv4
+  neighbor 1.1.1.1 activate
+  neighbor 1.1.1.1 send-community extended
+  neighbor 3.3.3.3 activate
+  neighbor 3.3.3.3 send-community extended
+ exit-address-family
+ address-family ipv4 vrf CongTy
+  redistribute connected
+  redistribute static
+!
+end
+wr
+!

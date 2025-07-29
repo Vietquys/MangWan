@@ -1,0 +1,15 @@
+conf t
+hostname SPOKE-CANTHO
+!
+interface e0/0
+ ip address 192.168.50.10 255.255.255.0
+ no shutdown
+interface s1/0
+ ip address 172.16.130.10 255.255.255.0
+ no shutdown
+!
+ip route 0.0.0.0 0.0.0.0 172.16.130.2
+!
+end
+wr
+!

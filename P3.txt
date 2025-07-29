@@ -1,0 +1,20 @@
+conf t
+hostname P3
+!
+interface e0/0
+ mpls ip
+ ip address 172.16.37.30 255.255.255.0
+ no shutdown
+interface e0/1
+ mpls ip
+ ip address 172.16.23.30 255.255.255.0
+ no shutdown
+!
+router ospf 1
+ network 172.16.37.0 0.0.0.255 area 0
+ network 172.16.23.0 0.0.0.255 area 0
+!
+end
+wr
+!
+

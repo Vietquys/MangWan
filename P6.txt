@@ -1,0 +1,19 @@
+conf t
+hostname P6
+!
+interface e0/0
+ mpls ip
+ ip address 172.16.56.60 255.255.255.0
+ no shutdown
+interface e0/1
+ mpls ip
+ ip address 172.16.63.60 255.255.255.0
+ no shutdown
+!
+router ospf 1
+ network 172.16.56.0 0.0.0.255 area 0
+ network 172.16.63.0 0.0.0.255 area 0
+!
+end
+wr
+!

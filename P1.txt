@@ -1,0 +1,29 @@
+conf t
+hostname P1
+!
+interface e0/0
+ mpls ip
+ ip address 172.16.115.10 255.255.255.0
+ no shutdown
+interface e0/1
+ mpls ip
+ ip address 172.16.12.10 255.255.255.0
+ no shutdown
+interface e0/2
+ mpls ip
+ ip address 172.16.11.10 255.255.255.0
+ no shutdown
+interface e0/3
+ mpls ip
+ ip address 172.16.14.10 255.255.255.0
+ no shutdown
+!
+router ospf 1
+ network 172.16.115.0 0.0.0.255 area 0
+ network 172.16.12.0 0.0.0.255 area 0
+ network 172.16.11.0 0.0.0.255 area 0
+ network 172.16.14.0 0.0.0.255 area 0
+!
+end
+wr
+!
